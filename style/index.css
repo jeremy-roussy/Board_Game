@@ -1,0 +1,57 @@
+:root {
+  
+}
+
+@font-face {
+  font-family: isaac;
+  src: url("../assets/IsaacGame.ttf");
+}
+
+* {    
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100vw;
+  height: 100vh;
+  background-color: #c1c1c1;
+  display: grid;
+  place-items: center;
+}
+
+#popup {
+  background-image: url("../assets/map.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 75%;
+  height: 75%;
+  display: grid;
+  place-items: center;
+}
+
+#content {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: isaac;
+  font-size: 3rem;
+}
+
+#content p, #sticks {
+    margin: 15px 0;
+    cursor: pointer;
+}
+
+#character {
+  height: 25%;
+  width: auto;
+}
+
+.contrast {
+    filter: contrast(200%);
+}

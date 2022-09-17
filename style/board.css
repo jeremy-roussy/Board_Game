@@ -1,0 +1,191 @@
+:root {
+    --bg-image: url("../assets/board.jpg");
+    --card-width: 62.2px;
+    --card-height: 85px;
+    --card-border: 2px;
+    --grid-margin: 5px;
+}
+
+* {
+    margin:0;
+    padding:0;
+}
+
+html {
+    width: 100vw;
+    height: 100vh;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    background-image: var(--bg-image);
+    background-size: auto;
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: var(--grid-margin) calc(var(--card-height) * 2 + var(--card-border) * 4 + 5px) auto calc(var(--card-height) * 2 + var(--card-border) * 4 + 10px) var(--grid-margin);
+    grid-template-columns: var(--grid-margin) calc(var(--card-width) * 9 + var(--card-border) * 18 + 5px * 8) auto calc(var(--card-width) * 9 + var(--card-border) * 18 + 5px * 8) var(--grid-margin);
+    grid-template-areas:
+        ". . . . ."
+        ". one . two ."
+        ". left middle right ." 
+        ". three . four ."
+        ". . . . .";
+}
+
+#player1 {
+    grid-area: one;
+}
+
+#player2 {
+    grid-area: two;
+}
+
+#player3 {
+    grid-area: three;
+}
+
+#player4 {
+    grid-area: four;
+}
+
+.left {
+    grid-area: left;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.middle {
+    grid-area: middle;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.right {
+    grid-area: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.row {
+    width: 100%;
+    height: calc(var(--card-height) + var(--card-border) * 2 + 2.5px);
+    display: flex;
+    justify-content: space-between;
+}
+
+.row:nth-child(odd) {
+    align-items: flex-start;
+}
+
+.row:nth-child(even) {
+    align-items: flex-end;
+}
+
+.slot {
+    width: var(--card-width);
+    height: var(--card-height);
+    border-radius: 5px;
+    border: var(--card-border) solid;
+    opacity: 0.75;
+}
+
+.left .slot, .middle .slot, .right .slot {
+    border: none;
+    opacity: 1;
+}
+
+.soul {    
+    background-size: 75%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#player1 .slot {
+    border-color:  white;
+}
+#player1 .soul {
+    background-image: url("../assets/white_soul.png");
+}
+#player1 .full {
+    background-color: white;
+}
+
+#player2 .slot {
+    border-color: #EF2917;
+}
+#player2 .soul {
+    background-image: url("../assets/red_soul.png");
+}
+#player2 .full {
+    background-color: #EF2917;
+}
+
+#player3 .slot {
+    border-color: #058ED9;
+}
+#player3 .soul {
+    background-image: url("../assets/blue_soul.png");
+}
+#player3 .full {
+    background-color: #058ED9;
+}
+
+#player4 .slot {
+    border-color: #1EFC1E;
+}
+#player4 .soul {
+    background-image: url("../assets/green_soul.png");
+}
+#player4 .full {
+    background-color: #1EFC1E;
+}
+
+
+/* some test */
+
+.flip {
+    position: absolute !important;
+    width: var(--card-width);
+    height: var(--card-height);
+}
+
+.flip .card.flipped {
+    transform: rotatey(-180deg);
+}
+
+.flip .card {
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: 0.5s;
+}
+
+.flip .card .face {
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+
+.flip .card .front {
+    position: absolute;
+    cursor: pointer;
+}
+.flip .card .back {
+    transform: rotatey(-180deg);
+    cursor: pointer;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+}
+
+.hover {
+  transform: scale(5);
+}
