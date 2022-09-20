@@ -1,3 +1,5 @@
+@import './die.css';
+
 :root {
     --bg-image: url("../assets/board.jpg");
     --card-width: 62.2px;
@@ -23,7 +25,7 @@ body {
     background-size: auto;
     overflow: hidden;
     display: grid;
-    grid-template-rows: var(--grid-margin) calc(var(--card-height) * 2 + var(--card-border) * 4 + 5px) auto calc(var(--card-height) * 2 + var(--card-border) * 4 + 10px) var(--grid-margin);
+    grid-template-rows: var(--grid-margin) calc(var(--card-height) * 2 + var(--card-border) * 4 + 45px) auto calc(var(--card-height) * 2 + var(--card-border) * 4 + 45px) var(--grid-margin);
     grid-template-columns: var(--grid-margin) calc(var(--card-width) * 9 + var(--card-border) * 18 + 5px * 8) auto calc(var(--card-width) * 9 + var(--card-border) * 18 + 5px * 8) var(--grid-margin);
     grid-template-areas:
         ". . . . ."
@@ -36,17 +38,53 @@ body {
 #player1 {
     grid-area: one;
 }
+#player1 .slot {
+    border-color:  white;
+}
+#player1 .soul {
+    background-image: url("../assets/white_soul.png");
+}
+#player1 .full {
+    background-color: white;
+}
 
 #player2 {
     grid-area: two;
+}
+#player2 .slot {
+    border-color: #EF2917;
+}
+#player2 .soul {
+    background-image: url("../assets/red_soul.png");
+}
+#player2 .full {
+    background-color: #EF2917;
 }
 
 #player3 {
     grid-area: three;
 }
+#player3 .slot {
+    border-color: #058ED9;
+}
+#player3 .soul {
+    background-image: url("../assets/blue_soul.png");
+}
+#player3 .full {
+    background-color: #058ED9;
+}
 
 #player4 {
     grid-area: four;
+}
+#player4 .slot {
+    border-color: #1EFC1E;
+}
+#player4 .soul {
+    background-image: url("../assets/green_soul.png");
+}
+#player4 .full {
+    background-color: #1EFC1E;
 }
 
 .left {
@@ -58,10 +96,38 @@ body {
 
 .middle {
     grid-area: middle;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
+    display: grid;
+    place-items: center;
+    grid-template-rows: auto auto auto;
+    grid-template-columns: auto auto;
+    grid-template-areas:
+        "character soul001"
+        "starting-item soul002"
+        "loot soul003";    
+}
+
+#character {
+    grid-area: character;
+}
+
+#starting-item {
+    grid-area: starting-item;
+}
+
+#loot {
+    grid-area: loot;
+}
+
+#soul001 {
+    grid-area: soul001;
+}
+
+#soul002 {
+    grid-area: soul002;
+}
+
+#soul003 {
+    grid-area: soul003;
 }
 
 .right {
@@ -69,6 +135,56 @@ body {
     display: flex;
     align-items: center;
     justify-content: flex-end;
+}
+
+#player1.set-up, #player2.set-up {
+    display: grid;
+    grid-template-rows: auto 40px;
+    grid-template-columns: 100%;
+    grid-template-areas:
+        "set"
+        "stats";
+}
+
+#player3.set-up, #player4.set-up {
+    display: grid;
+    grid-template-rows: 40px auto;
+    grid-template-columns: 100%;
+    grid-template-areas:
+        "stats"
+        "set";
+}
+
+.set {
+    grid-area: set;
+}
+
+.stats {
+    grid-area: stats;
+    width: calc(var(--card-width) * 5 + var(--card-border) * 10 + 4 * 5px);
+    height: calc(100% - 10px);
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+}
+
+.stats > div {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.stats img {
+    height: 100%;
+    width: auto;
+}
+
+.stats img:hover {
+    cursor: pointer;
+}
+  
+.brightness {
+    filter: brightness(0);
 }
 
 .row {
@@ -89,14 +205,12 @@ body {
 .slot {
     width: var(--card-width);
     height: var(--card-height);
+}
+
+.row .slot {    
     border-radius: 5px;
     border: var(--card-border) solid;
     opacity: 0.75;
-}
-
-.left .slot, .middle .slot, .right .slot {
-    border: none;
-    opacity: 1;
 }
 
 .soul {    
@@ -104,49 +218,6 @@ body {
     background-repeat: no-repeat;
     background-position: center;
 }
-
-#player1 .slot {
-    border-color:  white;
-}
-#player1 .soul {
-    background-image: url("../assets/white_soul.png");
-}
-#player1 .full {
-    background-color: white;
-}
-
-#player2 .slot {
-    border-color: #EF2917;
-}
-#player2 .soul {
-    background-image: url("../assets/red_soul.png");
-}
-#player2 .full {
-    background-color: #EF2917;
-}
-
-#player3 .slot {
-    border-color: #058ED9;
-}
-#player3 .soul {
-    background-image: url("../assets/blue_soul.png");
-}
-#player3 .full {
-    background-color: #058ED9;
-}
-
-#player4 .slot {
-    border-color: #1EFC1E;
-}
-#player4 .soul {
-    background-image: url("../assets/green_soul.png");
-}
-#player4 .full {
-    background-color: #1EFC1E;
-}
-
-
-/* some test */
 
 .flip {
     position: absolute !important;
@@ -175,6 +246,7 @@ body {
     position: absolute;
     cursor: pointer;
 }
+
 .flip .card .back {
     transform: rotatey(-180deg);
     cursor: pointer;
@@ -188,4 +260,49 @@ img {
 
 .hover {
   transform: scale(5);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#menu {
+    display: block;
+    background-color: white;
+    padding: 10px 0px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 30px lightgrey;
+    position: absolute;
+    transform-origin: center;
+    z-index: 999;
+    opacity: 0;
+    transform: scale(0);
+    transition: transform 0.2s, opacity 0.2s;
+}
+  
+#menu.show {
+    opacity: 1;
+    transform: scale(1);
+    transform-origin: top left;
+}
+  
+.menu-item {
+    display: block;
+    padding: 10px 30px;
+    transition: 0.1s;
+    color: #666;
+}
+  
+.menu-item:hover {
+    background-color: #eee;
+    cursor: pointer;
 }
